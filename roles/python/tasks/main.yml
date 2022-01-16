@@ -1,0 +1,7 @@
+---
+- name: install python
+  dnf:
+    name:
+      - python3
+      - python3-passlib
+    state: present

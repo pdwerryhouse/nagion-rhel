@@ -1,0 +1,11 @@
+---
+- name: Install misc tools
+  dnf:
+    name:
+      - net-tools
+    state: present
+
+- name: Set timezone
+  timezone:
+    name: Australia/Melbourne
+

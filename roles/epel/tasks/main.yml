@@ -1,0 +1,16 @@
+---
+- name: Install epel
+  dnf:
+    name: epel-release
+    state: latest
+
+- name: Install config-manager
+  dnf:
+    name: dnf-command(config-manager)
+    state: latest
+
+- name: Enable powertools
+  command:
+    cmd: dnf config-manager --set-enabled powertools
+    warn: false
+

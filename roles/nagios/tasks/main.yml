@@ -1,0 +1,35 @@
+---
+- name: Install nagios
+  dnf:
+    name:
+      - nagios
+    state: present
+
+- name: Install nagios-plugins-all
+  yum:
+    name: nagios-plugins-all
+    state: present
+
+- name: Install nagios.conf
+  copy:
+    src: nagios.conf
+    dest: /etc/nginx/conf.d/nagios.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Add a user to a password file and ensure permissions are set
+  htpasswd:
+    path: /etc/nagios/passwd
+    name: nagiosadmin
+    password: "{{ nagios_admin_password }}"
+    owner: root
+    group: nginx
+    mode: 0640
+
+- name: Start nagios
+  service:
+    name: nagios
+    enabled: yes
+    state: started
+
